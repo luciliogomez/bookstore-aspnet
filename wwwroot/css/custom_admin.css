@@ -1,0 +1,78 @@
+
+.free{
+    background-color: #4e73df !important;
+    color: white;
+}
+
+.selected{
+    background-color: #28a745;
+    color: white;
+}
+
+.ocupado{
+    background-color: #bd2b39 !important;
+    color: white;
+}
+.janela{
+    background-color: #20c997 !important;
+    color: white;
+}
+
+.btn-primary.pulse {
+    animation-name: pulse;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 0 0 rgba(#5a99d4, .5)
+  }
+
+  @keyframes pulse {
+    0%{
+        border: 1px solid #2953d1;
+        transform: scale(0.9);
+        /* @include transform(scale(.9)) */
+    }
+    70%{
+        /* border: 5px solid #2953d1; */
+        background-color: #4e73df;
+        transform: scale(1);
+        box-shadow: 0px 0px 0px 5px #6a8cf3;
+        
+    }
+    100%{
+        /* border: 1px solid #2953d1; */
+        background-color: #4e73df;
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(#69a6df, 0);
+        
+    }
+}
+
+.btn-success.pulse {
+    animation-name: pulse_success;
+    animation-duration: 0.8s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    box-shadow: 0 0 0 0 #1cc88a;
+}
+@keyframes pulse_success {
+    0%{
+        border: 1px solid #1cc88a;
+        transform: scale(0.9);
+        /* @include transform(scale(.9)) */
+    }
+    70%{
+        /* border: 5px solid #2953d1; */
+        background-color: #1cc88a;
+        transform: scale(1);
+        box-shadow: 0px 0px 0px 5px #4febb1;
+        
+    }
+    100%{
+        /* border: 1px solid #2953d1; */
+        background-color: #1cc88a;
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 #1cc88a;
+        
+    }
+}
