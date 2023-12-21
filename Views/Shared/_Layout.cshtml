@@ -44,9 +44,9 @@
         <a class="sidebar-brand d-flex align-items-center justify-content-center" 
         href="#">
             <div class="sidebar-brand-icon rotate-n-15">
-                <i class="far fa-paper-plane"></i>
+                <i class="far fa-book"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">PDC AIRLINES</div>
+            <div class="sidebar-brand-text mx-3">BOOKSTORE</div>
         </a>
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
@@ -59,18 +59,36 @@
             </a>
         </li>
         <li class="nav-item active">
+            <a class="nav-link" href="#">
+                <i class="fas fa-fw fa-book"></i>
+                <span>Livros</span>
+            </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="#">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+        </li>
+        <li class="nav-item active">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
             aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-book"></i>
-                <span>Aeroporto</span>
+                <span>Empréstimos</span>
             </a>
             <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="#">Lista de Aeroportos</a>
-                    <a class="collapse-item" href="#">Novo Aeroporto</a>
+                    <a class="collapse-item" href="#">Lista de Empréstimos</a>
+                    <a class="collapse-item" href="#">Multas Aplicadas</a>
                 </div>
             </div>
 
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="#">
+                <i class="fas fa-lock"></i>
+                <span>Utilizadores</span>
+            </a>
         </li>
     </ul>
     
@@ -116,10 +134,10 @@
                                 <i class="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Definições
                             </a>
-                            <a class="dropdown-item" href="#">
+                            @* <a class="dropdown-item" href="#">
                                 <i class="fas fa-globe fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Ir ao Portal
-                            </a>
+                            </a> *@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
