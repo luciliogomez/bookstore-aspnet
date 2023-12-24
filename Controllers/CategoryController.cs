@@ -49,5 +49,22 @@ namespace Bookstore.Controllers{
                 return View();
             }
         }
+
+        public IActionResult Edit(int? id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(int? id,Category Category)
+        {
+            return View();
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            return View();
+        }
+    
     }
 }

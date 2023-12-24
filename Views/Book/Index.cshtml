@@ -1,0 +1,138 @@
+@model IEnumerable<Bookstore.Models.Book>
+@{
+    ViewData["Title"] ="Lista de Livros";
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Lista de Livros
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            
+            <div class="p-2 d-flex justify-content-between align-items">
+              <div>
+                <a class="btn btn-primary" asp-action="Create">Adicionar Livro</a>
+              </div>
+              
+            </div>
+
+
+            <div class="border rounded">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    @* <th scope="col">ISBN</th> *@
+                    <th scope="col">Autor</th>
+                    @* <th scope="col">Ano</th> *@
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Preço</th>
+                    
+                    @* <th scope="col">Qtd. Total</th> *@
+                    <th scope="col">Qtd. Disponível </th>
+                    <th scope="col">Acções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null){
+                  @foreach(var item in Model){
+                    
+                        var Qtd = (item.Qtd - item.Borrowings.Where(b=>b.Returned == false).Count());
+                      
+                    <tr style="color: black;">
+                        <td>@item.Id</td>
+                        <td> @item.Title</td>
+                        @* <td> @item.Isbn</td> *@
+                        <td> @item.Autor</td>
+                        @* <td> @item.Year</td> *@
+                        
+                        @if(item.Category!=null)
+                        {
+                            <td>@item.Category.Name</td>
+                        }else{
+                            <td>Não definida</td>
+                        }
+                        
+                        <td> @item.Value</td>
+                        @* <td> @item.Qtd</td> *@
+                        <td>
+                          @Qtd 
+                        </td>
+                        <td class="d-flex">
+                            <a class=" btn  btn-info btn-sm mr-3"
+                            asp-action="Details" asp-route-id="@item.Id">
+                                Detalhes
+                            </a>
+                            @* <a class=" btn  btn-info btn-sm mr-3"
+                            role="button" data-toggle="modal" 
+                                data-target="#@item.Id">
+                                Detalhes
+                            </a> *@
+                            <a  class=" btn  btn-primary btn-sm mr-3"
+                            asp-action="Edit" asp-route-id="@item.Id">
+                                Editar
+                            </a>
+                            @* <a  class=" btn  btn-info btn-sm mr-3">
+                                Empréstimos
+                            </a> *@
+                            @* <a  class=" btn  btn-danger btn-sm mr-3">
+                                Eliminar
+                            </a> *@
+
+                        </td>
+                    
+                        
+                    </tr>
+                        <!--  MODAL DE DETALHES-->
+                    <div class="modal fade" id="@item.Id" 
+                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel">Detalhes do Livro</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="">
+                                <h6 class="fw-bold">ISBN: <span style="font-weight: normal;">@item.Isbn</span></h6>
+                                <h6 class="fw-bold">Ano de Lançamento: <span style="font-weight: normal;">@item.Year</span></h6>
+                                <h6 class="fw-bold">Quantidade Total: <span style="font-weight: normal;">@item.Qtd</span></h6>
+                                <h6 class="fw-bold">Quantidade Disponivel: <span style="font-weight: normal;">@item.Qtd</span></h6>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <!-- <button type="submit" class="btn btn-primary">Salvar</button> -->
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <!-- FIM DO MODAL DE DETALHES -->
+                    }
+                    }else{
+                        <tr>
+                            <td colspan="3" class="text-center">Sem Resultados</td>
+                        </tr>
+                    }
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2 p-2 w-full d-flex justify-content-center">
+              <div class="">
+              
+              </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>

@@ -1,0 +1,87 @@
+@model IEnumerable<Bookstore.Models.Client>
+@{
+    ViewData["Title"] ="Lista de Clientes";
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Lista de Clientes
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            
+            <div class="p-2 d-flex justify-content-between align-items">
+              <div>
+                <a class="btn btn-primary" asp-action="Create">Adicionar Cliente</a>
+              </div>
+              
+            </div>
+
+
+            <div class="border rounded">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data de Nascimento</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null){
+                  @foreach(var item in Model){
+                    <tr style="color: black;">
+                        <td>@item.Id</td>
+                        <td> @item.Name</td>
+                        <td> @item.Email</td>
+                        <td> @item.BornDate</td>
+                        <td class="text-center">
+                            @if(item.Active == true){
+                                <span class="btn btn-sm btn-success">Activo</span>
+                            }
+                            else{
+                                <span class="btn btn-sm btn-danger">Suspenso</span>
+                            }
+                        </td>
+                        <td class="d-flex">
+                          
+                          
+                          <a  class=" btn  btn-primary btn-sm mr-3"
+                          asp-action="Edit" asp-route-id="@item.Id">
+                            Editar
+                          </a>
+                          <a  class=" btn  btn-info btn-sm mr-3">
+                            Empréstimos
+                          </a>
+                          <a  class=" btn  btn-danger btn-sm mr-3">
+                            Eliminar
+                            </a>
+
+                        </td>
+                        
+                    </tr>
+                    }
+                    }else{
+                        <tr>
+                            <td colspan="3" class="text-center">Sem Resultados</td>
+                        </tr>
+                    }
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2 p-2 w-full d-flex justify-content-center">
+              <div class="">
+              
+              </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>

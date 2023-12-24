@@ -13,6 +13,6 @@ namespace Bookstore.Models
         [Required(ErrorMessage="Uma Data de nascimento é obrigatória")]
         public DateTime BornDate{get;set;} 
         public bool Active{get;set;} = true;
-        public List<Borrowing> Borrowings = new List<Borrowing>();
+        public List<Borrowing> Borrowings {get;set;} = new List<Borrowing>();
     }    
 }
