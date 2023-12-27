@@ -1,0 +1,89 @@
+@model IEnumerable<Bookstore.Models.Penalty>
+@{
+    ViewData["Title"] ="Multas aplicadas";
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Multas aplicadas
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            
+            @* <div class="p-2 d-flex justify-content-between align-items">
+              <div>
+                <a class="btn btn-primary" asp-action="SelectBook">Novo Empréstimo</a>
+              </div>
+              
+            </div> *@
+
+
+            <div class="border rounded">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nº do Emprestimo</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Livro</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Data </th>
+                    <th scope="col">Estado </th>
+                    <th scope="col">Açções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null){
+                  @foreach(var item in Model){
+                    
+                    <tr style="color: black;">
+                        <td>@item.Id</td>
+                        <td> @item.Borrowing.Id</td>
+                        <td> @item.Borrowing.Client.Name</td>
+                        <td> @item.Borrowing.Book.Title</td>
+                        <td> @item.Value</td>
+                        <td> @item.DateAplied</td>
+                        <td>
+                        @if(item.Solved==true)
+                        {
+                            <span class="text-success">Pago</span>    
+                        }else{
+                            <span class="text-danger">Não Pago</span>
+                        }
+                        </td>
+                        <td class="d-flex">
+                            <a  class=" btn  btn-primary btn-sm mr-3"
+                                asp-action="Show" asp-route-id="@item.Id">
+                                    Detalhes
+                            </a>
+                            @if(item.Solved != true)
+                            {
+                                <a  class=" btn  btn-success btn-sm mr-3"
+                                asp-action="Pay" asp-route-id="@item.Id">
+                                    Pagar
+                                </a>
+                            }   
+                        </td>
+                    </tr>
+                    }
+                    }else{
+                        <tr>
+                            <td colspan="3" class="text-center">Sem Resultados</td>
+                        </tr>
+                    }
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2 p-2 w-full d-flex justify-content-center">
+              <div class="">
+              
+              </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>

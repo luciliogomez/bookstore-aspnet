@@ -1,0 +1,104 @@
+@model IEnumerable<Bookstore.Models.Borrowing>
+@{
+    ViewData["Title"] ="Lista de Empréstimos";
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Lista de Empréstimos
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            
+            <div class="p-2 d-flex justify-content-between align-items">
+              <div>
+                <a class="btn btn-primary" asp-action="SelectBook">Novo Empréstimo</a>
+              </div>
+              
+            </div>
+
+
+            <div class="border rounded">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Livro</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Data de Empréstimo</th>
+                    <th scope="col">Data de Devolução</th>
+                    <th scope="col">Estado </th>
+                    <th scope="col">Prazo Violado? </th>
+                    <th scope="col">Acções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @if(Model != null){
+                  @foreach(var item in Model){
+                    
+                    <tr style="color: black;">
+                        <td>@item.Id</td>
+                        <td> @item.Book.Title</td>
+                        @* <td> @item.Isbn</td> *@
+                        <td> @item.Client.Name</td>
+                        <td> @item.RequestDate</td>
+                        <td> @item.ReturnDate</td>
+                        <td>
+                        @if(item.Returned==true)
+                        {
+                            <span class="text-primary">Devolvido</span>    
+                        }else{
+                            <span class="text-info">Requisitado</span>
+                        }
+                        </td>
+                        <td>
+                        @if(item.PrizeViolated==true)
+                        {
+                            <span class="text-danger ">Violado</span>    
+                        }else if((item.ReturnDate < DateTime.Now) && item.Returned == false){
+                            <span class="text-danger ">Violado</span>
+                        }
+                        else{
+                            <span class="text-secondary ">Não</span>
+                        }
+                        </td>
+                        <td class="d-flex">
+                            @if(item.Returned != true)
+                            {
+                                <a  class=" btn  btn-success btn-sm mr-3"
+                                asp-action="Show" asp-route-id="@item.Id">
+                                    Devolver
+                                </a>
+                            }else{
+                              <a  class=" btn  btn-info btn-sm mr-3"
+                                asp-action="Show" asp-route-id="@item.Id">
+                                    Detalhes
+                                </a>
+                            }   
+                            
+                        </td>
+                    
+                        
+                    </tr>
+                    }
+                    }else{
+                        <tr>
+                            <td colspan="3" class="text-center">Sem Resultados</td>
+                        </tr>
+                    }
+                </tbody>
+              </table>
+            </div>
+            <div class="mt-2 p-2 w-full d-flex justify-content-center">
+              <div class="">
+              
+              </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</main>

@@ -1,6 +1,7 @@
 using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Controllers{
 
@@ -85,6 +86,28 @@ namespace Bookstore.Controllers{
             }catch(Exception)
             {
                 TempData["ErrorMessage"] = "Falha ao actualizar dados do Cliente";
+                return View();
+            }
+        }
+
+        public IActionResult Borrowings(int? id)
+        {
+            try{
+                if(id == null)
+            {
+                TempData["ErrorMessage"] = "Cliente não encontrado";
+                return RedirectToAction("Index");
+            }
+            var Client = _context.Clients.Include(c=>c.Borrowings).ThenInclude(b=>b.Book).ToList().Find(c=>c.Id == id);
+            if(Client == null)
+            {
+                TempData["ErrorMessage"] = "Cliente não encontrado";
+                return RedirectToAction("Index");
+            }
+            return View(Client);
+            }catch(Exception)
+            {
+                TempData["ErrorMessage"] = "Falha ao buscar dados do Cliente";
                 return View();
             }
         }

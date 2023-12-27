@@ -1,21 +1,22 @@
 @model IEnumerable<Bookstore.Models.Client>
 @{
-    ViewData["Title"] ="Lista de Clientes";
+    ViewData["Title"] ="Emprestimo - Selecionar Cliente";
+    var Book = ViewData["Book"] as Book;
 }
 
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-0 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
-            Lista de Clientes
+            Selecionar Cliente
         </h2>
 
         <!-- TABELA  -->
         <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
             
             <div class="p-2 d-flex justify-content-between align-items">
-              <div>
+              @* <div>
                 <a class="btn btn-primary" asp-action="Create">Adicionar Cliente</a>
-              </div>
+              </div> *@
               
             </div>
 
@@ -49,19 +50,13 @@
                             }
                         </td>
                         <td class="d-flex">
+                          @if(item.Active == true){
+                                <a  class=" btn  btn-primary btn-sm mr-3"
+                                asp-action="Create" asp-route-id="@item.Id" asp-route-book="@Book.Id">
+                                    Selecionar
+                                </a>
+                            }
                           
-                          
-                          <a  class=" btn  btn-primary btn-sm mr-3"
-                          asp-action="Edit" asp-route-id="@item.Id">
-                            Editar
-                          </a>
-                          <a asp-controller="Client" asp-action="Borrowings" asp-route-id="@item.Id" class=" btn  btn-info btn-sm mr-3">
-                            Empréstimos
-                          </a>
-                          @* <a  class=" btn  btn-danger btn-sm mr-3">
-                            Eliminar
-                            </a> *@
-
                         </td>
                         
                     </tr>

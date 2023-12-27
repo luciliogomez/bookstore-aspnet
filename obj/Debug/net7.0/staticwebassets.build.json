@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "I4BdBKQJQkJ1j8Ud7rF/8r59+FkRypFbH5/sXYmeHNU=",
+  "Hash": "HHqAYxFgCvoePh8HwnWmEVrDTPrGOOZhvTNy88LM1sQ=",
   "Source": "Bookstore",
   "BasePath": "_content/Bookstore",
   "Mode": "Default",
@@ -117,6 +117,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\img\\book.png",
+      "SourceId": "Bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.ASP.NET\\Bookstore\\wwwroot\\",
+      "BasePath": "_content/Bookstore",
+      "RelativePath": "img/book.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\book.png"
     },
     {
       "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\js\\custom_admin.js",

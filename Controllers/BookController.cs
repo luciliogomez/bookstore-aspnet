@@ -63,7 +63,7 @@ namespace Bookstore.Controllers{
             return NotFound();
 
             try{
-                var Book = _context.Books.Find(id);
+                var Book = _context.Books.Include(b=>b.Borrowings).Include(b=>b.Category).ToList().Find(b=> b.Id == id);
                 if(Book != null)
                 {
                     return View(Book);

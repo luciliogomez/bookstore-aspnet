@@ -1,0 +1,110 @@
+@model Bookstore.Models.Borrowing
+@{
+    ViewData["Title"] ="Emprestimo";
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Emprestimo
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs text-dark">
+            
+            <div class="border rounded p-2 text-dark">
+                
+                <div class="row text-dark mb-1">
+                    <div class="col-12 col-md-4">
+                        <h5>Livro: <span style="font-weight: lighter;"> @Model.Book.Title</span></h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5>Cliente: <span style="font-weight: lighter;">@Model.Client.Name</span></h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5>Data de Emprestimo: <span style="font-weight: lighter;">@Model.RequestDate</span></h5>
+                    </div>
+                </div>
+                <div class="row text-dark">
+                    <div class="col-12 col-md-4">
+                        <h5>Data de Devolução: <span style="font-weight: lighter;">@Model.ReturnDate</span></h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h5>Estado: 
+                            @if(Model.Returned == false)
+                            {
+                                <span class="text-primary" style="font-weight: bolder;">Requisitado</span>
+                            }else{
+                                <span class="text-success" style="font-weight: bolder;">Devolvido</span>
+                            }
+                        </h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                         <h5>Prazo Violado: 
+                            @if(Model.PrizeViolated == true)
+                            {
+                                <span class="text-danger">Violado</span>
+                            }else{
+                                <span class="text-success" >Não Violado</span>
+                            }
+                        </h5>
+                    </div>
+                </div>
+                    
+                    
+                </div>
+                    <div class="p-2 mt-1">
+                        <form asp-action="Devolver" method="post">
+                            <input type="hidden" asp-for="Id">
+                            <div class=" form-row mt-3">
+                                @if(Model.Returned == false)
+                                {
+                                <div class="form-group col-12 col-md-2">
+                                    <input type="submit" value="Devolver" class=" btn btn-sm btn-primary">
+                                </div>
+                                }
+                                @if((Model.PrizeViolated && Model.Returned == true) && (Model.Penalty==null)){
+                                <div class="form-group col-12 col-md-3">
+                                    <a asp-controller="Penalty" asp-action="Create" 
+                                        asp-route-id="@Model.Id" class="btn btn-sm btn-warning">Aplicar Multa</a>
+                                </div>
+                                }
+                            </div>
+                        </form>
+                        
+                    </div>
+
+
+                @if(Model.Penalty!=null){
+            <div class="border rounded p-2 mt-3">
+                <h4 class="mb-2">Multa Aplicada</h4>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <h5 class="fw-bold">Data: <span style="font-weight: lighter;">@Model.Penalty.DateAplied</span></h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h5 class="fw-bold">Valor da Multa: <span style="font-weight: lighter;">@Model.Penalty.Value</span></h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        @if(@Model.Penalty.Solved){
+                            <h5 class="fw-bold">Estado: <span class="text-success" style="font-weight: lighter;">Pago</span></h5>
+                        }else{
+                            <h5 class="fw-bold">Estado: <span class="text-danger fw-bold" >Não Pago</span> 
+                                <a  class=" btn  btn-success btn-sm mr-3"
+                                asp-controller="Penalty"    asp-action="Pay" asp-route-id="@Model.Penalty.Id">
+                                    Pagar
+                                </a>
+                            </h5>
+                        }
+                    </div>
+                </div>
+            </div>
+            }
+            </div>
+            
+
+        </div>
+
+
+    </div>
+</main>

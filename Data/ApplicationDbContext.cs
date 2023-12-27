@@ -18,6 +18,11 @@ namespace Bookstore.Data{
         public DbSet<Borrowing> Borrowings{get;set;}=null!;
         public DbSet<Penalty> Penalties{get;set;}=null!;
         public DbSet<User> Users{get;set;}=null!;
-        
+
+        // protected override void OnModelCreating(ModelBuilder modelBuilder)
+        // {
+        //     modelBuilder.Entity<Borrowing>().Property(b => b.Id).ValueGeneratedOnAdd();
+        //     // modelBuilder.Entity<Borrowing>().Property(b => b.Id).ValueGeneratedOnAdd();
+        // }
     }
 }

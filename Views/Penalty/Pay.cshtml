@@ -1,0 +1,140 @@
+@model Bookstore.Models.Penalty
+@{
+    ViewData["Title"] ="Pagar Multa "+Model.Id;
+}
+
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Pagar Multa @Model.Id
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            <h3>Deseja Confirmar o pagamento desta multa?</h3>
+            <div class="border rounded p-2 mb-2">
+                
+                <div class="row text-dark mb-2">
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Multa nº: </h6>
+                        <h5><span > @Model.Id</span></h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Valor da Multa: </h6>
+                        <h5>
+                            <span > @Model.Value</span>
+                        </h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6>Estado da Multa:</h6>
+                        <h5>
+                                 @if(Model.Solved == true)
+                        {
+                            <span class="text-success">Paga</span>
+                        }else{
+                            <span class="text-danger">Não Paga</span>
+                        }
+                        </h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Emprestimo nº: </h6>
+                        <h5><span > @Model.Borrowing.Id</span></h5>
+                    </div>
+                    
+                    
+                </div>
+
+                <div class="row text-dark mb-2">
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Data de Emprestimo: </h6>
+                        <h5><span >@Model.Borrowing.RequestDate</span></h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Data de Devolução: </h6>
+                        <h5><span >  @Model.Borrowing.ReturnDate</span></h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Estado: 
+                            
+                        </h6>
+                        <h5>@if(Model.Borrowing.Returned == false)
+                            {
+                                <span class="text-primary" style="font-weight: bolder;">Requisitado</span>
+                            }else{
+                                <span class="text-success" style="font-weight: bolder;">Devolvido</span>
+                            }</h5>
+                    </div>
+                    <div class="col-12 col-md-3">
+                         <h6 style="font-weight: lighter;">Prazo Violado: </h6>
+                        <h5>@if(Model.Borrowing.PrizeViolated == true)
+                            {
+                                <span class="text-danger">Violado</span>
+                            }else{
+                                <span class="text-success" >Não Violado</span>
+                            }</h5>
+                    </div>
+                </div>
+                <div class="row text-dark mb-1">
+                    <div class="col-12 col-md-3">
+                        <h6 style="font-weight: lighter;">Cliente: </h6>
+                        <h5><span >@Model.Borrowing.Client.Name</span></h5>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h6 style="font-weight: lighter;">Livro: </h6>
+                        <h5><span >@Model.Borrowing.Book.Title</span></h5>
+                    </div>
+                </div>
+                <div>
+                    @* <h2>Multa nº: @Model.Id</h2>
+                    <h2>Emprestimo nº: @Model.Borrowing.Id</h2>
+                    <h2>Cliente: @Model.Borrowing.Client.Name</h2>
+                    <h2>Livro: @Model.Borrowing.Book.Title</h2>
+                    <h2>Data de Emprestimo: @Model.Borrowing.RequestDate</h2>
+                    <h2>Data de Devolução: @Model.Borrowing.ReturnDate</h2>
+                    <h2>Estado: 
+                        @if(Model.Borrowing.Returned == false)
+                        {
+                            <span>Requisitado</span>
+                        }else{
+                            <span>Devolvido</span>
+                        }
+                    </h2> *@
+                    @* <h2>Prazo Violado: 
+                        @if(Model.Borrowing.PrizeViolated == true)
+                        {
+                            <span class="text-danger">Violado</span>
+                        }else{
+                            <span>Não</span>
+                        }
+                    </h2>
+
+                    <h2>Valor da Multa: @Model.Value</h2> *@
+                    
+                    
+                </div>
+
+            </div>
+            <div>
+                        <form asp-action="Pay" method="post">
+                            <input type="hidden" asp-for="Id">
+                            <div class=" form-row mt-3">
+                                @if(Model.Solved == false)
+                                {
+                                <div class="form-group col-12 col-md-3">
+                                    <input type="submit" value="Confirma Pagamento" class=" btn btn-sm btn-primary">
+                                </div>
+                                }
+                                <div class="form-group col-12 col-md-2">
+                                    <a asp-controller="Penalty" asp-action="Index" 
+                                        asp-route-id="@Model.Id" class="btn btn-sm btn-danger">Voltar</a>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+
+        </div>
+
+
+    </div>
+</main>

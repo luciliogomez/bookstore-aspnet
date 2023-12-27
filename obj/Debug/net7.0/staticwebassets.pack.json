@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\img\\book.png",
+      "PackagePath": "staticwebassets\\img\\book.png"
+    },
+    {
       "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\js\\custom.js",
       "PackagePath": "staticwebassets\\js\\custom.js"
     },
