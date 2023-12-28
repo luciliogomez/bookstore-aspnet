@@ -1,6 +1,7 @@
 
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 namespace Bookstore.Models
 {
     public class Book
@@ -20,6 +21,9 @@ namespace Bookstore.Models
         public int Year{get;set;}
 
         public string? Cover{get;set;}
+        
+        [NotMapped]
+        public IFormFile? CoverFile { get; set; }
 
         public int Qtd{get;set;}
 
@@ -30,5 +34,8 @@ namespace Bookstore.Models
 
         public Category? Category{get;set;} = null!;
         public List<Borrowing> Borrowings {get;set;} = new List<Borrowing>();
+        
+        
+
     }    
 }

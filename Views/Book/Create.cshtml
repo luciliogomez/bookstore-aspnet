@@ -12,7 +12,7 @@
         <!-- TABELA  -->
         <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
             
-        <form class="form" asp-action="Create" method="post" >
+        <form class="form" asp-action="Create" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-12 col-md-3 mr-1">
                             <label for="">Título</label>
@@ -59,6 +59,11 @@
                             <label for="">Valor de Empréstimo</label>
                             <input type="text" asp-for="Value" class="form-control" placeholder="Valor cobrado no empréstimo" min="0">
                             <span class="text-danger" asp-validation-for="Value"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CoverFile" class="control-label"></label>
+                            <input asp-for="CoverFile" type="file" class="form-control" />
+                            <span asp-validation-for="CoverFile" class="text-danger"></span>
                         </div>
                         
                                 
