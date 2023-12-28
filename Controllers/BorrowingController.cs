@@ -13,14 +13,20 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             try{
+                if(page<1)page=1;
+                var RealPage = page - 1;
 
                 var Borrowings = (_context.Borrowings != null)?_context.Borrowings
                                                 .Include(b=>b.Book)
                                                     .Include(b=>b.Client)
-                                                        .ToList():new List<Borrowing>();
+                                                        .OrderBy(b=>b.Id)
+                                                            .Skip((RealPage*5))
+                                                                .Take(5)
+                                                                 .ToList():new List<Borrowing>();
+                setPaginationConfig(page,5.0);
                 return View(Borrowings);
             }catch(Exception)
             {
@@ -147,5 +153,18 @@ namespace Bookstore.Controllers{
             }
 
         }
+
+
+        private void setPaginationConfig(int page, double size)
+        {
+                double pages = _context.Borrowings.Count() / size;
+                ViewData["total_pages"] = Math.Ceiling(pages);
+                Console.WriteLine("TOTAL PAGES = " +ViewData["total_pages"] );
+                ViewData["actual_page"] = page;
+                ViewData["next_page"] = page + 1;
+                ViewData["prev_page"] = page==1?page:page - 1;
+                
+        }
+
     }
 }

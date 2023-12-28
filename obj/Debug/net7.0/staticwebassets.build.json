@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AILJhJBaVVyMb+hR1tozm9rRiPAohjE3Ys8Ma/T0Bvk=",
+  "Hash": "eBsUw8aU7ShMKpOPHiu+fZoQoWFZsMOKh9dLvzvarJ0=",
   "Source": "Bookstore",
   "BasePath": "_content/Bookstore",
   "Mode": "Default",
@@ -1530,6 +1530,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\260827a6-80c0-41c0-9abb-eeeb96f6357e_IMG-20230526-WA0102.jpg"
     },
     {
+      "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\44832dfb-388e-462f-b088-81686284b6d2_IMG-20230526-WA0104.jpg",
+      "SourceId": "Bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.ASP.NET\\Bookstore\\wwwroot\\",
+      "BasePath": "_content/Bookstore",
+      "RelativePath": "uploads/44832dfb-388e-462f-b088-81686284b6d2_IMG-20230526-WA0104.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\44832dfb-388e-462f-b088-81686284b6d2_IMG-20230526-WA0104.jpg"
+    },
+    {
       "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\521a7563-1eee-4d5a-9f78-ca37fd63a334_93871746_2699989836902226_469934911843729408_n.jpg",
       "SourceId": "Bookstore",
       "SourceType": "Discovered",
@@ -1581,6 +1598,23 @@
       "OriginalItemSpec": "wwwroot\\uploads\\6c7cff18-eeba-4eca-8087-939989a87bc3_IMG-20230526-WA0104.jpg"
     },
     {
+      "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\8a27edb0-b2ea-4d1d-8268-b81ce08b270f_abebb75d-93fd-4fc1-9bb6-d83840336b2f.jpg",
+      "SourceId": "Bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.ASP.NET\\Bookstore\\wwwroot\\",
+      "BasePath": "_content/Bookstore",
+      "RelativePath": "uploads/8a27edb0-b2ea-4d1d-8268-b81ce08b270f_abebb75d-93fd-4fc1-9bb6-d83840336b2f.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\8a27edb0-b2ea-4d1d-8268-b81ce08b270f_abebb75d-93fd-4fc1-9bb6-d83840336b2f.jpg"
+    },
+    {
       "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\926be8b1-1a2e-44a1-9154-c8ff72ca5c96_IMG-20230526-WA0104.jpg",
       "SourceId": "Bookstore",
       "SourceType": "Discovered",
@@ -1613,6 +1647,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\9442d1d3-afbd-48a0-b1c1-eae602c1f2de_riverside_OTDSzcovIAMCJSQ=_Ze do Pau. Paginas rasgadas do livro da minha vida.txt"
+    },
+    {
+      "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\95bcc302-654e-4190-8276-214907c96a07_book.png",
+      "SourceId": "Bookstore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.ASP.NET\\Bookstore\\wwwroot\\",
+      "BasePath": "_content/Bookstore",
+      "RelativePath": "uploads/95bcc302-654e-4190-8276-214907c96a07_book.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\95bcc302-654e-4190-8276-214907c96a07_book.png"
     },
     {
       "Identity": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\989e7ec1-a33c-41aa-a2c7-7593b826495e_00c177e8-dab8-4a95-bdd4-1bb55ec513e5.jpg",

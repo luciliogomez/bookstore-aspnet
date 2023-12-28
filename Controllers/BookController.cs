@@ -19,12 +19,20 @@ namespace Bookstore.Controllers{
             _webHostEnvironment = _webHost;
         }
 
-        public IActionResult Index()
-        {
+        public IActionResult Index(int page = 1 )
+        {   
+            if(page<1)page=1;
+            var RealPage = page - 1;
             try{
-                var Books = (_context.Books!=null) ? _context.Books.Include(b=>b.Category)
-                                                                    .Include(b=>b.Borrowings)
-                                                                        .ToList() : new List<Book>();
+                var Books = (_context.Books!=null) ? 
+                                _context.Books.Include(b=>b.Category)
+                                        .Include(b=>b.Borrowings)
+                                                // .ToList()
+                                                    .OrderBy(b=>b.Id)
+                                                        .Skip((RealPage*10))
+                                                            .Take(10)
+                                                                .ToList() : new List<Book>();
+                setPaginationConfig(page,10.0);
 
                 return View(Books);
             }catch(Exception){
@@ -125,6 +133,16 @@ namespace Bookstore.Controllers{
 
                 // Retorna o caminho do arquivo salvo
                 return "/uploads/" + fileName;
+        }
+
+        private void setPaginationConfig(int page, double size)
+        {
+                double pages = _context.Books.Count() / size;
+                ViewData["total_pages"] = Math.Ceiling(pages);
+                Console.WriteLine("TOTAL PAGES = " +ViewData["total_pages"] );
+                ViewData["actual_page"] = page;
+                ViewData["next_page"] = page + 1;
+                ViewData["prev_page"] = page==1?page:page - 1;
         }
     }
 }

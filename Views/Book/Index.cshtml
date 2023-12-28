@@ -1,6 +1,10 @@
 @model IEnumerable<Bookstore.Models.Book>
 @{
     ViewData["Title"] ="Lista de Livros";
+    var nextPage = ViewData["next_page"];
+    var prevPage = ViewData["prev_page"];
+    var actualPage = ViewData["actual_page"];
+    var totalPages = int.Parse(ViewData["total_pages"].ToString());
 }
 
 <main class="h-full pb-16 overflow-y-auto">
@@ -127,7 +131,33 @@
             </div>
             <div class="mt-2 p-2 w-full d-flex justify-content-center">
               <div class="">
-              
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                          @if((int)prevPage==(int)actualPage)
+                          {
+                            <li class="page-item disabled"><a class="page-link " asp-action="Index" asp-route-page="@prevPage">Anterior</a></li>
+                          }else{
+                            <li class="page-item"><a class="page-link  " asp-action="Index" asp-route-page="@prevPage">Anterior</a></li>
+                          }
+                          @for(int i = 1;i <= totalPages; i++)
+                          {
+                            @if(actualPage.ToString() == i.ToString())
+                            {
+                              <li class="page-item bg-primary  text-light active"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li> 
+                            }
+                            else{
+                              <li class="page-item  text-light"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li> 
+                            }
+                          }
+                          @if((int)nextPage>totalPages)
+                          {
+                            <li class="page-item disabled"><a class="page-link  " asp-action="Index" asp-route-page="@nextPage">Próximo</a></li>
+                          }else{
+                            <li class="page-item"><a class="page-link  " asp-action="Index" asp-route-page="@nextPage">Próximo</a></li>
+                          }
+                          
+                        </ul>
+                      </nav>                     
               </div>
             </div>
 

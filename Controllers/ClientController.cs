@@ -15,10 +15,18 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             try{
-                var Clients = (_context.Clients!=null)?_context.Clients.ToList():new List<Client>();
+                if(page<1)page=1;
+                var RealPage = page - 1;
+                var Clients = (_context.Clients!=null)?
+                                        _context.Clients
+                                            .OrderBy(c=>c.Id)
+                                                .Skip((RealPage*5))
+                                                    .Take(5).ToList()
+                                                        :new List<Client>();
+                setPaginationConfig(page,5.0);
                 return View(Clients);
             }catch(Exception)
             {
@@ -110,6 +118,17 @@ namespace Bookstore.Controllers{
                 TempData["ErrorMessage"] = "Falha ao buscar dados do Cliente";
                 return View();
             }
+        }
+
+
+         private void setPaginationConfig(int page, double size)
+        {
+                double pages = _context.Clients.Count() / size;
+                ViewData["total_pages"] = Math.Ceiling(pages);
+                Console.WriteLine("TOTAL PAGES = " +ViewData["total_pages"] );
+                ViewData["actual_page"] = page;
+                ViewData["next_page"] = page + 1;
+                ViewData["prev_page"] = page==1?page:page - 1;
         }
     }
 }

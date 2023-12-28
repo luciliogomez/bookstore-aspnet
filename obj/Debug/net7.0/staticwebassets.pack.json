@@ -353,6 +353,10 @@
       "PackagePath": "staticwebassets\\uploads\\260827a6-80c0-41c0-9abb-eeeb96f6357e_IMG-20230526-WA0102.jpg"
     },
     {
+      "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\44832dfb-388e-462f-b088-81686284b6d2_IMG-20230526-WA0104.jpg",
+      "PackagePath": "staticwebassets\\uploads\\44832dfb-388e-462f-b088-81686284b6d2_IMG-20230526-WA0104.jpg"
+    },
+    {
       "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\521a7563-1eee-4d5a-9f78-ca37fd63a334_93871746_2699989836902226_469934911843729408_n.jpg",
       "PackagePath": "staticwebassets\\uploads\\521a7563-1eee-4d5a-9f78-ca37fd63a334_93871746_2699989836902226_469934911843729408_n.jpg"
     },
@@ -365,12 +369,20 @@
       "PackagePath": "staticwebassets\\uploads\\6c7cff18-eeba-4eca-8087-939989a87bc3_IMG-20230526-WA0104.jpg"
     },
     {
+      "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\8a27edb0-b2ea-4d1d-8268-b81ce08b270f_abebb75d-93fd-4fc1-9bb6-d83840336b2f.jpg",
+      "PackagePath": "staticwebassets\\uploads\\8a27edb0-b2ea-4d1d-8268-b81ce08b270f_abebb75d-93fd-4fc1-9bb6-d83840336b2f.jpg"
+    },
+    {
       "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\926be8b1-1a2e-44a1-9154-c8ff72ca5c96_IMG-20230526-WA0104.jpg",
       "PackagePath": "staticwebassets\\uploads\\926be8b1-1a2e-44a1-9154-c8ff72ca5c96_IMG-20230526-WA0104.jpg"
     },
     {
       "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\9442d1d3-afbd-48a0-b1c1-eae602c1f2de_riverside_OTDSzcovIAMCJSQ=_Ze do Pau. Paginas rasgadas do livro da minha vida.txt",
       "PackagePath": "staticwebassets\\uploads\\9442d1d3-afbd-48a0-b1c1-eae602c1f2de_riverside_OTDSzcovIAMCJSQ=_Ze do Pau. Paginas rasgadas do livro da minha vida.txt"
+    },
+    {
+      "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\95bcc302-654e-4190-8276-214907c96a07_book.png",
+      "PackagePath": "staticwebassets\\uploads\\95bcc302-654e-4190-8276-214907c96a07_book.png"
     },
     {
       "Id": "C:\\.ASP.NET\\Bookstore\\wwwroot\\uploads\\989e7ec1-a33c-41aa-a2c7-7593b826495e_00c177e8-dab8-4a95-bdd4-1bb55ec513e5.jpg",
