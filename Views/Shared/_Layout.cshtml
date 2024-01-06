@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    var userIsAuthenticated = User.Identity.IsAuthenticated;
+    @* string userEmail = User.FindFirst("name"); *@
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -53,7 +61,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" asp-controller="Home" asp-action="Index">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>
@@ -91,10 +99,22 @@
             </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" asp-controller="User" asp-action="Index">
                 <i class="fas fa-lock"></i>
                 <span>Utilizadores</span>
             </a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="#" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                            data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt "></i>
+                                <span>Terminar Sessão</span>
+                            </a>
+                            <form id="logout-form" method="POST" class="d-none"
+                            asp-controller="Account" asp-action="LogOut">
+                                        
+                            </form>
         </li>
     </ul>
     
@@ -119,16 +139,31 @@
                 <ul class="navbar-nav ml-auto">
                      <!-- Nav Item - User Information -->
                      <li class="nav-item dropdown no-arrow">
+                        @if(SignInManager.IsSignedIn(User)){
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                            
-                            <span class="mr-2 d-none d-md-inline text-gray-600 ">Admin</span>
+                            <span class="mr-2 d-none d-md-inline text-gray-600 ">@UserManager.GetUserName(User)</span>
                             <!-- <img class="img-profile rounded-circle"
                                 src="img/undraw_profile.svg"> -->
                             
                                 <i class="fas fa-user"></i>
                             
                         </a>
+                        }
+                        @if (userIsAuthenticated)
+                        {
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           
+                            <span class="mr-2 d-none d-md-inline text-gray-600 ">@User.Identity.Name </span>
+                            <!-- <img class="img-profile rounded-circle"
+                                src="img/undraw_profile.svg"> -->
+                            
+                                <i class="fas fa-user"></i>
+                            
+                            </a>
+                        }
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
@@ -144,6 +179,7 @@
                                 <i class="fas fa-globe fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Ir ao Portal
                             </a> *@
+                            @if(userIsAuthenticated){
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"
@@ -151,9 +187,10 @@
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Terminar Sessão
                             </a>
-                            <form id="logout-form" action="#" method="POST" class="d-none">
+                            @* <form id="logout-form" action="#" method="POST" class="d-none">
                                         
-                            </form>
+                            </form> *@
+                            }
                             
                         </div>
                     </li>

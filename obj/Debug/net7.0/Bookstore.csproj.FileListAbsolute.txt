@@ -9,6 +9,7 @@ C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Bookstore.pdb
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Azure.Core.dll
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Azure.Identity.dll
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Humanizer.dll
+C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
 C:\.ASP.NET\Bookstore\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll

@@ -1,0 +1,106 @@
+@model Bookstore.Models.Book
+@{
+    ViewData["Title"] ="Editar Livro";
+    var categories = ViewData["categories"] as List<Bookstore.Models.Category>;
+}
+<main class="h-full pb-16 overflow-y-auto">
+    <div class="container grid px-0 mx-auto">
+        <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
+            Editar Livro
+        </h2>
+
+        <!-- TABELA  -->
+        <div class="w-full p-3 overflow-hidden bg-white rounded-lg shadow-xs">
+            
+        <form class="form" asp-action="Edit" method="post" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id">
+                    <div class="d-flex justify-content-center align-items-start py-3">
+                        <div class="w-25 bg-red">
+                            @if(Model.Cover == null){
+                                <img src="~/img/book.png" alt="" style="width: 200px;height:280px" class="border rounded">
+                            }else{
+                                <img src="@Model.Cover" alt="" style="width: 200px;height:280px" class="border rounded img-fluid">
+                            }
+                        
+                        </div>
+                    
+                    <div class="w-75   mb-2">
+                    <div class="form-row">
+                        <div class="form-group col-12 col-md-6 ">
+                            <label for="">Título</label>
+                            <input type="text" asp-for="Title" class="form-control" placeholder="Titulo do Livro">
+                            <span class="text-danger" asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="">Autor</label>
+                            <input type="text" asp-for="Autor" class="form-control" placeholder="Nome do autor principal" >
+                            <span class="text-danger" asp-validation-for="Autor"></span>
+                        </div>
+                        
+                        
+                        
+                                
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12 col-md-3 ">
+                            <label for="">ISBN</label>
+                            <input type="text" asp-for="Isbn" class="form-control" placeholder="Isbn do Livro">
+                            <span class="text-danger" asp-validation-for="Isbn"></span>
+                        </div>
+                        <div class="form-group col-12 col-md-3 ">
+                            <label for="">Categoria</label>
+                            <select asp-for="CategoryId" class="form-control">
+                                @* <option value="1" selected>Literatura</option>
+                                <option value="2">Ficção</option>
+                                <option value="3">Ciência</option> *@
+                                @foreach(var item in categories){
+                                    
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span class="text-danger" asp-validation-for="CategoryId"></span>
+                        </div>
+                        
+                        <div class="form-group col-12 col-md-3 ">
+                            <label for="">Quantidade</label>
+                            <input type="number" asp-for="Qtd" class="form-control" placeholder="Quantidade em stock" min="1" >
+                            <span class="text-danger" asp-validation-for="Qtd"></span>
+                        </div>
+                        <div class="form-group col-12 col-md-3 ">
+                            <label for="">Ano</label>
+                            <input type="number" asp-for="Year" class="form-control" 
+                                placeholder="Ano de lançamento do livro" min="1000">
+                            <span class="text-danger" asp-validation-for="Year"></span>
+                        </div>
+                        
+                        
+                                
+                    </div>
+                    <div class=" form-row mt-3">
+                        <div class="form-group col-12 col-md-3 ">
+                            <label for="">Valor de Empréstimo</label>
+                            <input type="text" asp-for="Value" class="form-control" placeholder="Valor cobrado no empréstimo" min="0">
+                            <span class="text-danger" asp-validation-for="Value"></span>
+                        </div>
+                        <div class="form-group col-12 col-md-5">
+                            <label asp-for="CoverFile" class="control-label">Capa do Livro</label>
+                            <input asp-for="CoverFile" type="file" class="form-control" />
+                            <span asp-validation-for="CoverFile" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class=" form-row mt-3">
+                        <div class="form-group col-12 col-md-5">
+                            <input type="submit" value="Guardar" class="w-50 btn btn-md btn-primary">
+                    
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                </form>
+           
+
+        </div>
+
+
+    </div>
+</main>

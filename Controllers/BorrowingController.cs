@@ -2,6 +2,8 @@ using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Controllers{
 
@@ -13,6 +15,7 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index(int page = 1)
         {
             try{
@@ -34,6 +37,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult SelectBook()
         {
             try{
@@ -44,6 +48,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult BorrowBook(int? id)
         {
             try{
@@ -61,6 +66,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Create(int id, int book)
         {
             try{
@@ -82,6 +88,7 @@ namespace Bookstore.Controllers{
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create([Bind("RequestDate","ReturnDate","Returned","PrizeViolated","BookId","ClientId")]Borrowing Borrowing)
         {
             try{
@@ -104,6 +111,7 @@ namespace Bookstore.Controllers{
         }
 
 
+        [Authorize]
         public IActionResult Show(int? id)
         {
             try{
@@ -130,6 +138,7 @@ namespace Bookstore.Controllers{
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult Devolver(int? id,Borrowing updateBorrowing)
         {
 
@@ -145,6 +154,28 @@ namespace Bookstore.Controllers{
                 _context.Borrowings.Update(borrowing);
                 _context.SaveChanges();
                 TempData["SuccessMessage"] = "Livro Devolvido";
+                return RedirectToAction("Index");
+            }catch(Exception e)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um problema tente outra vez";
+                return RedirectToAction("Index");
+            }
+
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Delete(int? id)
+        {
+
+            try{
+                if(id == null)return NotFound();
+                var borrowing = _context.Borrowings.Find(id);
+
+                if (borrowing == null) return NotFound();
+                _context.Borrowings.Remove(borrowing);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Empréstimo Removido";
                 return RedirectToAction("Index");
             }catch(Exception e)
             {

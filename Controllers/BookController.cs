@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Controllers{
 
@@ -19,6 +20,7 @@ namespace Bookstore.Controllers{
             _webHostEnvironment = _webHost;
         }
 
+        [Authorize]
         public IActionResult Index(int page = 1 )
         {   
             if(page<1)page=1;
@@ -39,7 +41,7 @@ namespace Bookstore.Controllers{
                 return View();
             }
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             var categories = _context.Categories.ToList();
@@ -48,6 +50,7 @@ namespace Bookstore.Controllers{
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(Book book)
         {
             
@@ -83,7 +86,7 @@ namespace Bookstore.Controllers{
             }
         }
 
-        
+        [Authorize]
         public IActionResult Details(int? id)
         {
             if(id == null)
@@ -104,6 +107,89 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
+        public IActionResult Edit(int? id)
+        {
+            if(id == null)
+            return NotFound();
+
+            try{
+                var Book = _context.Books.Include(b=>b.Borrowings).Include(b=>b.Category).ToList().Find(b=> b.Id == id);
+                if(Book != null)
+                {
+                    var categories = _context.Categories.ToList();
+                    ViewData["categories"] = categories;
+                    return View(Book);
+                }
+                TempData["ErrorMessage"] = "Livro nao encontrado.";
+                return RedirectToAction("Index");
+            }catch(Exception)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um erro, tente novamente.";
+                return View();
+            }
+        }
+
+
+         [HttpPost]
+         [Authorize]
+        public async Task<IActionResult> Edit(int id,Book book)
+        {
+            
+            
+            try{
+                if(ModelState.IsValid)
+                {
+                    if(book.CoverFile != null && book.CoverFile.Length > 0)
+                    {
+                        // Salvar o arquivo no servidor ou em um serviço de armazenamento (por exemplo, Azure Blob Storage)
+                        // Aqui, você pode usar um método para salvar o arquivo e obter o caminho do arquivo.
+                        string? name = await SaveFileAndGetPath(book.CoverFile);
+                        if(name == null){
+                            TempData["ErrorMessage"] = "Ficheiro não suportado.";
+                            return RedirectToAction("Edit",id);
+                        }
+                        book.Cover = name; 
+                    }
+
+                    _context.Books.Update(book);
+                    _context.SaveChanges();
+                    TempData["SuccessMessage"] = "Livro Actualizado";
+                    return RedirectToAction("Edit",id);
+                }else{
+                    TempData["ErrorMessage"] = "Não foi possível actualizar  o livro, tente novamente.";
+                    return View();
+                }
+            }catch(Exception)
+            {
+                TempData["ErrorMessage"] = "Não foi possível actualizar  o livro, tente novamente.";
+                return View();
+                
+            }
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Delete(int? id)
+        {
+
+            try{
+                if(id == null)return NotFound();
+                var Book = _context.Books.Find(id);
+
+                if (Book == null) return NotFound();
+                _context.Books.Remove(Book);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Livro Removido";
+                return RedirectToAction("Index");
+            }catch(Exception e)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um problema tente outra vez";
+                return RedirectToAction("Index");
+            }
+
+        }
 
         // HELPERS
 

@@ -1,10 +1,12 @@
 
 using Bookstore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bookstore.Data{
 
-    public class ApplicationDbContext : DbContext{
+    public class ApplicationDbContext : IdentityDbContext<AppUser>{
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             :base(options)
@@ -18,6 +20,7 @@ namespace Bookstore.Data{
         public DbSet<Borrowing> Borrowings{get;set;}=null!;
         public DbSet<Penalty> Penalties{get;set;}=null!;
         public DbSet<User> Users{get;set;}=null!;
+        public DbSet<AppUser> AppUsers {get;set;}
 
         // protected override void OnModelCreating(ModelBuilder modelBuilder)
         // {

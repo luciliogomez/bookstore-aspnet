@@ -2,6 +2,8 @@ using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Controllers{
 
@@ -13,6 +15,7 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index(int page = 1)
         {
             try{
@@ -37,6 +40,7 @@ namespace Bookstore.Controllers{
         }
 
 
+        [Authorize]
         public IActionResult Create(int? id)
         {
             try{
@@ -55,6 +59,7 @@ namespace Bookstore.Controllers{
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create([Bind("DateAplied","Solved","Value","BorrowingId")]Penalty Penalty)
         {
             try{
@@ -87,6 +92,7 @@ namespace Bookstore.Controllers{
         }
 
 
+        [Authorize]
         public IActionResult Show(int? id)
         {
             try{
@@ -113,6 +119,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Pay(int? id)
         {
             try{
@@ -140,6 +147,7 @@ namespace Bookstore.Controllers{
         }
 
         [HttpPost,ActionName("Pay")]
+        [Authorize]
         public IActionResult PayPenalty(int? id)
         {
 

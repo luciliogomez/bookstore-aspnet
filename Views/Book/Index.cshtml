@@ -80,40 +80,43 @@
                             asp-action="Edit" asp-route-id="@item.Id">
                                 Editar
                             </a>
-                            @* <a  class=" btn  btn-info btn-sm mr-3">
-                                Empréstimos
-                            </a> *@
-                            @* <a  class=" btn  btn-danger btn-sm mr-3">
+                            @{
+                              var modalId = "modal" + item.Id;
+                            }
+                          <a class=" btn  btn-danger btn-sm mr-3"
+                            role="button" data-toggle="modal" 
+                                data-target="#@modalId">
                                 Eliminar
-                            </a> *@
+                            </a>
 
                         </td>
                     
                         
                     </tr>
-                        <!--  MODAL DE DETALHES-->
-                    <div class="modal fade" id="@item.Id" 
+                       
+                       <!--  MODAL DE DETALHES-->
+                    <div class="modal fade" id="@modalId" role="dialog" 
                         tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">Detalhes do Livro</h3>
+                            <h3 class="modal-title" id="exampleModalLabel">Remover Livro</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="">
-                                <h6 class="fw-bold">ISBN: <span style="font-weight: normal;">@item.Isbn</span></h6>
-                                <h6 class="fw-bold">Ano de Lançamento: <span style="font-weight: normal;">@item.Year</span></h6>
-                                <h6 class="fw-bold">Quantidade Total: <span style="font-weight: normal;">@item.Qtd</span></h6>
-                                <h6 class="fw-bold">Quantidade Disponivel: <span style="font-weight: normal;">@item.Qtd</span></h6>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <!-- <button type="submit" class="btn btn-primary">Salvar</button> -->
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            
+                                  <h4 class="text-center mb-2">Deseja realmente eliminar este Livro?</h4>
+                                  <p class="text-center text-warning " style="font-size:0.9em">Todos os empréstimos deste livro serão removidos também.</p>
+                                  <form asp-action="Delete" method="post">
+                                    <input type="hidden" name="id" value="@item.Id">
+                                    <div class="d-flex justify-content-center">
+                                        <input type="submit" value="Eliminar" class="btn btn-danger mr-3">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                  </form>
+                           </div>
                           </div>
                           
                         </div>

@@ -2,6 +2,8 @@ using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Controllers{
 
@@ -15,6 +17,7 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index(int page = 1)
         {
             try{
@@ -34,12 +37,14 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Client client)
         {
             try{
@@ -60,6 +65,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Edit(int? id)
         {
             if(id == null)
@@ -77,6 +83,7 @@ namespace Bookstore.Controllers{
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(int? id, Client client)
         {
             try{
@@ -98,6 +105,7 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Borrowings(int? id)
         {
             try{
@@ -120,7 +128,27 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [HttpPost]
+        [Authorize]
+        public IActionResult Delete(int? id)
+        {
 
+            try{
+                if(id == null)return NotFound();
+                var Client = _context.Clients.Find(id);
+
+                if (Client == null) return NotFound();
+                _context.Clients.Remove(Client);
+                _context.SaveChanges();
+                TempData["SuccessMessage"] = "Ciente Removido";
+                return RedirectToAction("Index");
+            }catch(Exception e)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um problema tente outra vez";
+                return RedirectToAction("Index");
+            }
+
+        }
          private void setPaginationConfig(int page, double size)
         {
                 double pages = _context.Clients.Count() / size;

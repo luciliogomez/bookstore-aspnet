@@ -1,16 +1,13 @@
-@model IEnumerable<Bookstore.Models.Client>
+@model IEnumerable<Bookstore.Models.AppUser>
 @{
-    ViewData["Title"] ="Lista de Clientes";
-    var nextPage = ViewData["next_page"];
-    var prevPage = ViewData["prev_page"];
-    var actualPage = ViewData["actual_page"];
-    var totalPages = int.Parse(ViewData["total_pages"].ToString());
+    ViewData["Title"] ="Lista de Utilizadores";
+    
 }
 
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container grid px-0 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 ">
-            Lista de Clientes
+            Lista de Utilizadores
         </h2>
 
         <!-- TABELA  -->
@@ -18,7 +15,7 @@
             
             <div class="p-2 d-flex justify-content-between align-items">
               <div>
-                <a class="btn btn-primary" asp-action="Create">Adicionar Cliente</a>
+                <a class="btn btn-primary" asp-action="Create">Adicionar Utilizador</a>
               </div>
               
             </div>
@@ -29,10 +26,8 @@
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
+                    <th scope="col">Nome de Utilizador</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Acções</th>
                   </tr>
                 </thead>
@@ -41,26 +36,14 @@
                   @foreach(var item in Model){
                     <tr style="color: black;">
                         <td>@item.Id</td>
-                        <td> @item.Name</td>
+                        <td> @item.UserName</td>
                         <td> @item.Email</td>
-                        <td> @item.BornDate</td>
-                        <td class="text-center">
-                            @if(item.Active == true){
-                                <span class="btn btn-sm btn-success">Activo</span>
-                            }
-                            else{
-                                <span class="btn btn-sm btn-danger">Suspenso</span>
-                            }
-                        </td>
                         <td class="d-flex">
                           
                           
                           <a  class=" btn  btn-primary btn-sm mr-3"
                           asp-action="Edit" asp-route-id="@item.Id">
                             Editar
-                          </a>
-                          <a asp-controller="Client" asp-action="Borrowings" asp-route-id="@item.Id" class=" btn  btn-info btn-sm mr-3">
-                            Empréstimos
                           </a>
                           @{
                               var modalId = "modal" + item.Id;
@@ -70,9 +53,6 @@
                                 data-target="#@modalId">
                                 Eliminar
                             </a>
-                          @* <a  class=" btn  btn-danger btn-sm mr-3">
-                            Eliminar
-                            </a> *@
 
                         </td>
                         
@@ -84,15 +64,15 @@
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">Remover Cliente</h3>
+                            <h3 class="modal-title" id="exampleModalLabel">Remover Utilizador</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
                             <div class="">
-                                  <h4 class="text-center mb-2">Deseja realmente eliminar este Cliente?</h4>
-                                  <p class="text-center text-warning " style="font-size:0.8em">Todos os seus emprestimos serão removidos também.</p>
+                                  <h4 class="text-center mb-2">Deseja realmente eliminar este Utilizador?</h4>
+                                  @* <p class="text-center text-warning " style="font-size:0.8em">Todos os seus emprestimos serão removidos também.</p> *@
                                   <form asp-action="Delete" method="post">
                                     <input type="hidden" name="id" value="@item.Id">
                                     <div class="d-flex justify-content-center">
@@ -118,33 +98,7 @@
             </div>
             <div class="mt-2 p-2 w-full d-flex justify-content-center">
               <div class="">
-                       <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                          @if((int)prevPage==(int)actualPage)
-                          {
-                            <li class="page-item disabled"><a class="page-link " asp-action="Index" asp-route-page="@prevPage">Anterior</a></li>
-                          }else{
-                            <li class="page-item"><a class="page-link  " asp-action="Index" asp-route-page="@prevPage">Anterior</a></li>
-                          }
-                          @for(int i = 1;i <= totalPages; i++)
-                          {
-                            @if(actualPage.ToString() == i.ToString())
-                            {
-                              <li class="page-item bg-primary  text-light active"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li> 
-                            }
-                            else{
-                              <li class="page-item  text-light"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li> 
-                            }
-                          }
-                          @if((int)nextPage>totalPages)
-                          {
-                            <li class="page-item disabled"><a class="page-link  " asp-action="Index" asp-route-page="@nextPage">Próximo</a></li>
-                          }else{
-                            <li class="page-item"><a class="page-link  " asp-action="Index" asp-route-page="@nextPage">Próximo</a></li>
-                          }
-                          
-                        </ul>
-                      </nav> 
+                       
               </div>
             </div>
 

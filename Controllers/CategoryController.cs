@@ -2,6 +2,8 @@
 using Bookstore.Data;
 using Bookstore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bookstore.Controllers{
 
@@ -13,6 +15,7 @@ namespace Bookstore.Controllers{
             _context = context;
         }
 
+        [Authorize]
         public IActionResult Index(int page = 1)
         {
 
@@ -33,13 +36,14 @@ namespace Bookstore.Controllers{
             }
             
         }
-
+        [Authorize]
         public  IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(Category Category)
         {
             try{
@@ -58,17 +62,56 @@ namespace Bookstore.Controllers{
             }
         }
 
+        [Authorize]
         public IActionResult Edit(int? id)
         {
-            return View();
+            try{
+                if(id==null)
+                {
+                    TempData["ErrorMessage"] = "Categoria não encontrada";;
+                    return RedirectToAction("Index");
+                }
+
+                var Category = _context.Categories.Find(id);
+                if(Category == null)
+                {
+                    TempData["ErrorMessage"] = "Categoria não encontrada";
+                    return RedirectToAction("Index");
+                }
+                return View(Category);
+            }catch(Exception)
+            {
+                TempData["ErrorMessage"] = "Ocorreu um erro. Tente novamente";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Edit(int? id,Category Category)
         {
-            return View();
+            try{
+                if(id == null || Category.Id != id)
+                {
+                    TempData["ErrorMessage"] = "Ocorreu um erro. Tente novamente";
+                    return RedirectToAction("Index");
+                }
+                if(ModelState.IsValid)
+                {
+                    _context.Categories.Update(Category);
+                    _context.SaveChanges();
+                    TempData["SuccessMessage"] = "Categoria Actualizada";
+                    return RedirectToAction("Index");
+                }
+                return View();
+            }catch(Exception)
+            {
+                TempData["ErrorMessage"] = "Erro ao actualizar categoria";
+                return RedirectToAction("Edit",id);
+            }
         }
 
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             return View();
