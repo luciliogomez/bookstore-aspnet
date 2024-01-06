@@ -1,5 +1,7 @@
 ## BookStore - é um  sistema de gestão de uma Biblioteca. 
 
+<img src="./layout.gif">
+
 ##  Requisitos Funcionais do Sistema
 * Registar Clientes da biblioteca
 * Registar livros disponiveis na biblioteca
@@ -14,11 +16,7 @@
 
 
 
-##  Layout do Projecto
 
-<br>
-
-<img src="./layout.gif">
 
 ## Tecnologias e Ferramentas de Desenvolvimento utilizadas:
 * C#, ASP.NET CORE v7.0
